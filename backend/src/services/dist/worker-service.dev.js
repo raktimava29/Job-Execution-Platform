@@ -24,6 +24,23 @@ var register = function register(_ref) {
   });
 };
 
+var heartbeat = function heartbeat(workerId) {
+  return regeneratorRuntime.async(function heartbeat$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(pool.query("\n    UPDATE workers\n    SET last_heartbeat = NOW()\n    WHERE id = $1\n    ", [workerId]));
+
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+
 module.exports = {
-  register: register
+  register: register,
+  heartbeat: heartbeat
 };

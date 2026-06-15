@@ -12,7 +12,10 @@ const startHeartbeat = (workerId) => {
 
       console.log("Heartbeat sent");
     } catch (error) {
-      console.error("Heartbeat failed");
+      console.error(
+        "Heartbeat failed:",
+        error.response?.data || error.message
+      );
     }
   }, 5000);
 };

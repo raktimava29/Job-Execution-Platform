@@ -30,6 +30,22 @@ const register = async ({
   return result.rows[0];
 };
 
+const heartbeat = async (
+  workerId
+) => {
+
+  await pool.query(
+    `
+    UPDATE workers
+    SET last_heartbeat = NOW()
+    WHERE id = $1
+    `,
+    [workerId]
+  );
+
+};
+
 module.exports = {
   register,
+  heartbeat,
 };
