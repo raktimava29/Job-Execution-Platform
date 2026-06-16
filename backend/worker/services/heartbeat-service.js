@@ -4,7 +4,7 @@ const startHeartbeat = (workerId) => {
   setInterval(async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/workers/heartbeat",
+        `${process.env.API_URL}/api/workers/heartbeat`,
         {
           workerId,
         }

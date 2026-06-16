@@ -3,7 +3,6 @@ import Link from "next/link";
 export default function Navbar() {
 
   return (
-
     <nav className="
       bg-black
       text-white
@@ -29,9 +28,6 @@ export default function Navbar() {
         </Link>
 
       </div>
-
     </nav>
-
   );
-
 }

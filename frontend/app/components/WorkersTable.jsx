@@ -23,13 +23,9 @@ export default function WorkersTable({
 }) {
 
   return (
-
     <div className="bg-white rounded-xl shadow overflow-hidden">
-
       <table className="w-full">
-
         <thead className="bg-gray-100">
-
           <tr>
 
             <th className="p-4 text-left">
@@ -108,13 +104,8 @@ export default function WorkersTable({
             </tr>
 
           ))}
-
         </tbody>
-
       </table>
-
     </div>
-
   );
-
 }

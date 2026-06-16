@@ -5,7 +5,6 @@ export default function StatCard({
 }) {
 
   return (
-
     <div
       className={`
         p-6
@@ -22,9 +21,6 @@ export default function StatCard({
       <p className="text-3xl font-bold">
         {value}
       </p>
-
     </div>
-
   );
-
 }

@@ -1,5 +1,4 @@
-const pool =
-  require("../../src/config/db");
+const pool = require("../../src/config/db");
 
 const startExecution = async (
   workerId,

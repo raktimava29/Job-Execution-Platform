@@ -91,9 +91,7 @@ export default function JobDetails() {
   };
 
   return (
-
     <main className="p-10">
-
       <h1 className="
         text-4xl
         font-bold
@@ -141,9 +139,7 @@ export default function JobDetails() {
             >
               {job.status}
             </span>
-
           </div>
-
           <div>
 
             <strong>
@@ -151,7 +147,6 @@ export default function JobDetails() {
             </strong>
 
             <div className="mt-2">
-
               <div className="
                 w-full
                 bg-gray-200
@@ -178,7 +173,6 @@ export default function JobDetails() {
               </p>
 
             </div>
-
           </div>
 
           <p>
@@ -222,9 +216,7 @@ export default function JobDetails() {
               ).toLocaleString()
             }
           </p>
-
         </div>
-
       </div>
 
       <h2 className="
@@ -243,11 +235,8 @@ export default function JobDetails() {
       ">
 
         <table className="w-full">
-
           <thead className="bg-gray-100">
-
             <tr>
-
               <th className="p-4 text-left">
                 Worker
               </th>
@@ -267,11 +256,8 @@ export default function JobDetails() {
               <th className="p-4 text-left">
                 Error
               </th>
-
             </tr>
-
           </thead>
-
           <tbody>
 
             {executions.map(
@@ -284,7 +270,6 @@ export default function JobDetails() {
                   hover:bg-gray-50
                 "
               >
-
                 <td className="p-4">
                   {
                     execution.worker_id
@@ -349,15 +334,9 @@ export default function JobDetails() {
               </tr>
 
             ))}
-
           </tbody>
-
         </table>
-
       </div>
-
     </main>
-
   );
-
 }

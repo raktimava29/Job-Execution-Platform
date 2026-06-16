@@ -11,104 +11,94 @@ module.exports = function (workerId) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("\n================================");
             console.log("PROCESSOR STARTED");
             console.log("Worker:", workerId);
             console.log("BullMQ Job ID:", job.id);
             console.log("Payload:", job.data);
-            console.log("================================\n");
             jobId = job.data.jobId;
-            _context.prev = 7;
+            _context.prev = 5;
             console.log("Starting execution for ".concat(jobId));
-            _context.next = 11;
+            _context.next = 9;
             return regeneratorRuntime.awrap(pool.query("\n        SELECT last_checkpoint\n        FROM jobs\n        WHERE id=$1\n        ", [jobId]));
 
-          case 11:
+          case 9:
             jobData = _context.sent;
             currentProgress = jobData.rows[0].last_checkpoint || 0;
 
             if (!(currentProgress >= 100)) {
-              _context.next = 16;
+              _context.next = 14;
               break;
             }
 
             console.log("Job ".concat(jobId, " already completed"));
             return _context.abrupt("return");
 
-          case 16:
-            _context.next = 18;
+          case 14:
+            _context.next = 16;
             return regeneratorRuntime.awrap(executionService.startExecution(workerId, jobId));
 
-          case 18:
+          case 16:
             executionId = _context.sent;
-            console.log("Execution History ID: ".concat(executionId));
-            console.log("Current checkpoint: ".concat(currentProgress, "%"));
-            console.log("Resuming from: ".concat(currentProgress + 20, "%"));
             progress = currentProgress + 20;
 
-          case 23:
+          case 18:
             if (!(progress <= 100)) {
-              _context.next = 35;
+              _context.next = 28;
               break;
             }
 
-            console.log("Starting checkpoint ".concat(progress, "%"));
-            _context.next = 27;
+            _context.next = 21;
             return regeneratorRuntime.awrap(new Promise(function (resolve) {
               return setTimeout(resolve, 10000);
             }));
 
-          case 27:
-            _context.next = 29;
+          case 21:
+            _context.next = 23;
             return regeneratorRuntime.awrap(job.updateProgress(progress));
 
-          case 29:
-            _context.next = 31;
+          case 23:
+            _context.next = 25;
             return regeneratorRuntime.awrap(pool.query("\n          UPDATE jobs\n          SET\n            progress=$1,\n            last_checkpoint=$1\n          WHERE id=$2\n          ", [progress, jobId]));
 
-          case 31:
-            console.log("Checkpoint saved: ".concat(progress, "%"));
-
-          case 32:
+          case 25:
             progress += 20;
-            _context.next = 23;
+            _context.next = 18;
             break;
 
-          case 35:
-            console.log("Finishing Job ".concat(jobId));
-            _context.next = 38;
+          case 28:
+            _context.next = 30;
             return regeneratorRuntime.awrap(executionService.finishExecution(workerId, jobId, executionId));
 
-          case 38:
+          case 30:
             console.log("Job ".concat(jobId, " COMPLETED"));
-            _context.next = 51;
+            _context.next = 43;
             break;
 
-          case 41:
-            _context.prev = 41;
-            _context.t0 = _context["catch"](7);
+          case 33:
+            _context.prev = 33;
+            _context.t0 = _context["catch"](5);
             console.log("Job ".concat(jobId, " FAILED"));
             console.error(_context.t0);
-            _context.next = 47;
+            _context.next = 39;
             return regeneratorRuntime.awrap(pool.query("\n        UPDATE jobs\n        SET attempts = attempts + 1\n        WHERE id=$1\n        ", [jobId]));
 
-          case 47:
+          case 39:
             if (!executionId) {
-              _context.next = 50;
+              _context.next = 42;
               break;
             }
 
-            _context.next = 50;
+            _context.next = 42;
             return regeneratorRuntime.awrap(executionService.failExecution(workerId, jobId, executionId, _context.t0.message));
 
-          case 50:
+          case 42:
             throw _context.t0;
 
-          case 51:
+          case 43:
           case "end":
             return _context.stop();
         }
       }
-    }, null, null, [[7, 41]]);
+    }, null, null, [[5, 33]]);
   };
 };

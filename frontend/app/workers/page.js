@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-import WorkersTable
-from "../components/WorkersTable";
+import WorkersTable from "../components/WorkersTable";
 
 export default function WorkersPage() {
 
@@ -49,9 +48,7 @@ export default function WorkersPage() {
   }, []);
 
   return (
-
     <main className="p-10">
-
       <h1 className="text-4xl font-bold mb-8">
         Workers
       </h1>
@@ -59,9 +56,6 @@ export default function WorkersPage() {
       <WorkersTable
         workers={workers}
       />
-
     </main>
-
   );
-
 }

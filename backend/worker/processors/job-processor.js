@@ -1,15 +1,10 @@
-const pool =
-  require("../../src/config/db");
+const pool = require("../../src/config/db");
 
 const executionService = require("../services/execution-service");
 
 module.exports = (workerId) => {
 
   return async (job) => {
-
-    console.log(
-      "\n================================"
-    );
 
     console.log(
       "PROCESSOR STARTED"
@@ -28,10 +23,6 @@ module.exports = (workerId) => {
     console.log(
       "Payload:",
       job.data
-    );
-
-    console.log(
-      "================================\n"
     );
 
     const jobId =
@@ -69,17 +60,17 @@ module.exports = (workerId) => {
           jobId
         );
 
-      console.log(
-        `Execution History ID: ${executionId}`
-      );
+      // console.log(
+      //   `Execution History ID: ${executionId}`
+      // );
 
-      console.log(
-        `Current checkpoint: ${currentProgress}%`
-      );
+      // console.log(
+      //   `Current checkpoint: ${currentProgress}%`
+      // );
 
-      console.log(
-        `Resuming from: ${currentProgress + 20}%`
-      );
+      // console.log(
+      //   `Resuming from: ${currentProgress + 20}%`
+      // );
 
       for (
         let progress = currentProgress + 20;
@@ -87,9 +78,9 @@ module.exports = (workerId) => {
         progress += 20
       ) {
 
-        console.log(
-          `Starting checkpoint ${progress}%`
-        );
+        // console.log(
+        //   `Starting checkpoint ${progress}%`
+        // );
 
         await new Promise(
           resolve =>
@@ -114,15 +105,15 @@ module.exports = (workerId) => {
           ]
         );
 
-        console.log(
-          `Checkpoint saved: ${progress}%`
-        );
+      //   console.log(
+      //     `Checkpoint saved: ${progress}%`
+      //   );
 
       }
 
-      console.log(
-        `Finishing Job ${jobId}`
-      );
+      // console.log(
+      //   `Finishing Job ${jobId}`
+      // );
 
       await executionService.finishExecution(
         workerId,
@@ -164,7 +155,5 @@ module.exports = (workerId) => {
 
       throw error;
     }
-
   };
-
 };

@@ -9,7 +9,7 @@ var registerWorker = function registerWorker() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(axios.post("http://localhost:5000/api/workers/register", {
+          return regeneratorRuntime.awrap(axios.post("".concat(process.env.API_URL, "/api/workers/register"), {
             workerName: "worker-".concat(process.pid),
             hostName: require("os").hostname(),
             processId: process.pid.toString()

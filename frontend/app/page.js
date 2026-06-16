@@ -177,51 +177,45 @@ export default function Dashboard() {
 
       <div className="mt-10">
 
-  <h2 className="
-    text-2xl
-    font-bold
-    mb-4
-  ">
-    Recent Workers
-  </h2>
+        <h2 className="
+          text-2xl
+          font-bold
+          mb-4
+        ">
+          Recent Workers
+        </h2>
 
-  <div className="
-    bg-white
-    rounded-xl
-    shadow
-    p-4
-  ">
+        <div className="
+          bg-white
+          rounded-xl
+          shadow
+          p-4
+        ">
 
-    {workers.map(worker => (
+        {workers.map(worker => (
 
-      <div
-        key={worker.id}
-        className="
-          flex
-          justify-between
-          py-2
-          border-b
-        "
-      >
+          <div
+            key={worker.id}
+            className="
+              flex
+              justify-between
+              py-2
+              border-b
+            "
+          >
 
-        <span>
-          {worker.worker_name}
-        </span>
+          <span>
+            {worker.worker_name}
+          </span>
 
-        <span>
-          {worker.status}
-        </span>
-
+          <span>
+            {worker.status}
+          </span>
+        
+        </div>
+          ))}
+        </div>
       </div>
-
-    ))}
-
-  </div>
-
-</div>
-
     </main>
-
   );
-
 }

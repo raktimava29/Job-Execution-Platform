@@ -1,13 +1,9 @@
 require("dotenv").config();
 
 const { Worker } = require("bullmq");
-
 const redis = require("../src/config/redis");
-
 const registerWorker = require("./services/register-service");
-
 const startHeartbeat = require("./services/heartbeat-service");
-
 const createProcessor = require("./processors/job-processor");
 
 (async () => {
