@@ -27,11 +27,31 @@ export default function JobsPage() {
 
   useEffect(() => {
 
-    fetchJobs();
+  const loadJobs =
+    async () => {
+
+      try {
+
+        const response =
+          await api.get("/jobs");
+
+        setJobs(
+          response.data.data
+        );
+
+      } catch(error) {
+
+        console.error(error);
+
+      }
+
+    };
+
+    loadJobs();
 
     const interval =
       setInterval(
-        fetchJobs,
+        loadJobs,
         5000
       );
 
