@@ -90,6 +90,7 @@ const finishExecution = async (
     SET
       status='COMPLETED',
       progress=100,
+      last_checkpoint=100,
       completed_at=NOW()
     WHERE id=$1
     `,

@@ -45,6 +45,24 @@ module.exports = (workerId) => {
         `Starting execution for ${jobId}`
       );
 
+      const jobData = await pool.query(
+        `
+        SELECT last_checkpoint
+        FROM jobs
+        WHERE id=$1
+        `,
+        [jobId]
+      );
+
+      const currentProgress = jobData.rows[0].last_checkpoint || 0;
+
+      if (currentProgress >= 100) {
+        console.log(
+          `Job ${jobId} already completed`
+        );
+        return;
+      }
+
       executionId =
         await executionService.startExecution(
           workerId,
@@ -55,19 +73,27 @@ module.exports = (workerId) => {
         `Execution History ID: ${executionId}`
       );
 
+      console.log(
+        `Current checkpoint: ${currentProgress}%`
+      );
+
+      console.log(
+        `Resuming from: ${currentProgress + 20}%`
+      );
+
       for (
-        let progress = 0;
+        let progress = currentProgress + 20;
         progress <= 100;
         progress += 20
       ) {
 
         console.log(
-          `Job ${jobId}: ${progress}%`
+          `Starting checkpoint ${progress}%`
         );
 
         await new Promise(
           resolve =>
-            setTimeout(resolve, 5000)
+            setTimeout(resolve, 10000)
         );
 
         await job.updateProgress(
@@ -77,13 +103,19 @@ module.exports = (workerId) => {
         await pool.query(
           `
           UPDATE jobs
-          SET progress=$1
+          SET
+            progress=$1,
+            last_checkpoint=$1
           WHERE id=$2
           `,
           [
             progress,
             jobId
           ]
+        );
+
+        console.log(
+          `Checkpoint saved: ${progress}%`
         );
 
       }

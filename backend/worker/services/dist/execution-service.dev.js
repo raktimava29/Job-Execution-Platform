@@ -44,7 +44,7 @@ var finishExecution = function finishExecution(workerId, jobId, executionId) {
 
         case 3:
           _context2.next = 5;
-          return regeneratorRuntime.awrap(pool.query("\n    UPDATE jobs\n    SET\n      status='COMPLETED',\n      progress=100,\n      completed_at=NOW()\n    WHERE id=$1\n    ", [jobId]));
+          return regeneratorRuntime.awrap(pool.query("\n    UPDATE jobs\n    SET\n      status='COMPLETED',\n      progress=100,\n      last_checkpoint=100,\n      completed_at=NOW()\n    WHERE id=$1\n    ", [jobId]));
 
         case 5:
           _context2.next = 7;
