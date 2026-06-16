@@ -1,5 +1,41 @@
-const workerService =
-  require("../services/worker-service");
+const workerService = require("../services/worker-service");
+const pool = require("../config/db");
+
+const getWorkers = async (req, res) => {
+
+  try {
+
+    const result = await pool.query(
+      `
+      SELECT
+        id,
+        worker_name,
+        status,
+        current_job_id,
+        last_heartbeat,
+        created_at
+      FROM workers
+      ORDER BY created_at DESC
+      `
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: result.rows
+    });
+
+  } catch(error) {
+
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch workers"
+    });
+
+  }
+
+};
 
 const registerWorker = async (req, res) => {
   try {
@@ -38,4 +74,5 @@ const heartbeatWorker = async (req, res) => {
 module.exports = {
   registerWorker,
   heartbeatWorker,
+  getWorkers
 };
