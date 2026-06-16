@@ -26,12 +26,7 @@ export default function JobsTable({
 
   return (
 
-    <div className="
-      bg-white
-      rounded-xl
-      shadow
-      overflow-hidden
-    ">
+    <div className="bg-white rounded-xl shadow overflow-hidden">
 
       <table className="w-full">
         <thead className="bg-gray-100">

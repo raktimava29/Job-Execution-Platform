@@ -14,7 +14,8 @@ const startHeartbeat = (workerId) => {
     } catch (error) {
       console.error(
         "Heartbeat failed:",
-        error.response?.data || error.message
+        error.response?.data,
+        error.message
       );
     }
   }, 5000);
